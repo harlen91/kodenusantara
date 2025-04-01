@@ -17,6 +17,7 @@
             <li><a class="has-arrow" href="#" aria-expanded="false">
                     <i class="icon icon-single-copy-06"></i><span class="nav-text">Kelola</span></a>
                 <ul aria-expanded="false">
+                    <li><a href="{{ route('admin.tim') }}">Tim</a></li>
                     <li><a href="{{ route('admin.users') }}">Users</a></li>
                     <li><a href="{{ route('admin.proyek') }}">Project</a></li>
                 </ul>

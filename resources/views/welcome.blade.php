@@ -1,37 +1,7 @@
-<!DOCTYPE html>
-<html>
+@extends('layout.app')
+@section('title', 'Edukasi Kode Nusantara')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Desain Front End</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
-    <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}">
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-md sticky-top bg-primary py-3" id="page-top">
-        <div class="container-fluid"><a class="navbar-brand d-flex align-items-center" href="#"><span
-                    class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon"><img
-                        width="52" height="52"
-                        src="{{ asset('assets/img/logo EKN POLOS removebg.png') }}"></span><span class="fw-bold">EDUKASI
-                    KODE NUSANTARA</span></a><button data-bs-toggle="collapse" class="navbar-toggler"
-                data-bs-target="#navcol-2"><span class="visually-hidden">Toggle
-                    navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-2">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active fw-bold link-dark" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold link-dark" href="#fitur">Fitur</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold link-dark" href="#project">Project</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold link-dark" href="#kontak">Kontak</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold link-dark" href="#team">Team</a></li>
-                </ul><a class="btn btn-primary text-bg-secondary ms-md-2" role="button" href="#">Button</a>
-            </div>
-        </div>
-    </nav>
+@section('content')
     <div class="container-fluid py-4 py-xl-5" id="about">
         <div class="row gy-4 gy-md-0">
             <div
@@ -226,141 +196,46 @@
         <div class="row mb-5">
             <div class="col-md-8 col-xl-6 text-center mx-auto">
                 <h2>Project</h2>
-                <p class="w-lg-50">Curae hendrerit donec commodo hendrerit egestas tempus, turpis facilisis nostra
-                    nunc. Vestibulum dui eget ultrices.</p>
+                <p class="w-lg-50">Proyek pembangunan aplikasi yang pernah dikerjakan oleh Tim Edukasi Kode Nusantara</p>
             </div>
         </div>
         <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-            <div class="col">
-                <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;"
-                        src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <div class="py-4">
-                        <h4>Lorem libero donec</h4>
-                        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis
-                            in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+            @foreach ($proyek as $data)
+                <div class="col">
+                    <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;"
+                            src="{{ asset('foto/' . $data->foto) }}">
+                        <div class="py-4">
+                            <h4>{{ $data->nama }}</h4>
+                            {{-- <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis
+                                in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p> --}}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;"
-                        src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <div class="py-4">
-                        <h4>Lorem libero donec</h4>
-                        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis
-                            in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;"
-                        src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <div class="py-4">
-                        <h4>Lorem libero donec</h4>
-                        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis
-                            in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;"
-                        src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                    <div class="py-4">
-                        <h4>Lorem libero donec</h4>
-                        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis
-                            in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
         </div>
     </div>
     <div class="container py-4 py-xl-5" id="team">
         <div class="row mb-5">
             <div class="col-md-8 col-xl-6 text-center mx-auto">
                 <h2>Our Team</h2>
-                <p class="w-lg-50">Curae hendrerit donec commodo hendrerit egestas tempus, turpis facilisis nostra
-                    nunc. Vestibulum dui eget ultrices.</p>
             </div>
         </div>
         <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-lg-3">
-            <div class="col">
-                <div class="card border-0 shadow-none">
-                    <div class="card-body d-flex align-items-center p-0"><img
-                            class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130"
-                            src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                        <div>
-                            <h5 class="fw-bold text-secondary mb-0">John Smith</h5>
-                            <p class="text-muted mb-1">Erat netus</p>
-                            <ul class="list-inline fs-6 text-muted w-100 mb-0">
-                                <li class="list-inline-item text-center">
-                                    <div class="d-flex flex-column align-items-center"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                                            fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
-                                        </svg></div>
-                                </li>
-                                <li class="list-inline-item text-center">
-                                    <div class="d-flex flex-column align-items-center"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                                            fill="currentColor" viewBox="0 0 16 16" class="bi bi-instagram">
-                                        </svg></div>
-                                </li>
-                            </ul>
+            @foreach ($tim as $data)
+                <div class="col">
+                    <div class="card border-0 shadow-none">
+                        <div class="card-body d-flex align-items-center p-0"><img
+                                class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130"
+                                src="{{ asset('tim/' . $data->foto) }}">
+                            <div>
+                                <h5 class="fw-bold text-secondary mb-0">{{ $data->nama }}</h5>
+                                <p class="text-muted mb-1">{{ $data->jabatan }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card border-0 shadow-none">
-                    <div class="card-body d-flex align-items-center p-0"><img
-                            class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130"
-                            src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                        <div>
-                            <h5 class="fw-bold text-secondary mb-0"><strong>John Smith</strong></h5>
-                            <p class="text-muted mb-1">Erat netus</p>
-                            <ul class="list-inline fs-6 text-muted w-100 mb-0">
-                                <li class="list-inline-item text-center">
-                                    <div class="d-flex flex-column align-items-center"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                                            fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
-                                        </svg></div>
-                                </li>
-                                <li class="list-inline-item text-center">
-                                    <div class="d-flex flex-column align-items-center"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                                            fill="currentColor" viewBox="0 0 16 16" class="bi bi-instagram">
-                                        </svg></div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card border-0 shadow-none">
-                    <div class="card-body d-flex align-items-center p-0"><img
-                            class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130"
-                            src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                        <div>
-                            <h5 class="fw-bold text-secondary mb-0"><strong>John Smith</strong></h5>
-                            <p class="text-muted mb-1">Erat netus</p>
-                            <ul class="list-inline fs-6 text-muted w-100 mb-0">
-                                <li class="list-inline-item text-center">
-                                    <div class="d-flex flex-column align-items-center"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                                            fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
-                                        </svg></div>
-                                </li>
-                                <li class="list-inline-item text-center">
-                                    <div class="d-flex flex-column align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                                            fill="currentColor" viewBox="0 0 16 16" class="bi bi-instagram">
-                                        </svg>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     <section id="kontak" class="position-relative py-4 py-xl-5">
@@ -444,33 +319,4 @@
             </div>
         </div>
     </section>
-    <footer class="text-center bg-dark">
-        <div class="container-fluid text-white text-bg-secondary py-4 py-lg-5">
-            <ul class="list-inline">
-                <li class="list-inline-item me-4"><a class="fw-semibold text-decoration-none link-dark"
-                        href="#">Web design</a></li>
-                <li class="list-inline-item fw-semibold text-dark me-4"><a
-                        class="fw-semibold text-decoration-none link-dark" href="#">Development</a></li>
-                <li class="list-inline-item fw-semibold text-dark"><a
-                        class="fw-semibold text-decoration-none link-dark" href="#">Hosting</a></li>
-            </ul>
-            <ul class="list-inline">
-                <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em"
-                        height="1em" fill="currentColor" viewBox="0 0 16 16"
-                        class="bi bi-facebook text-dark-emphasis">
-                    </svg></li>
-                <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em"
-                        height="1em" fill="currentColor" viewBox="0 0 16 16"
-                        class="bi bi-twitter text-dark-emphasis">
-                    </svg></li>
-                <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                        fill="currentColor" viewBox="0 0 16 16" class="bi bi-instagram text-dark-emphasis">
-                    </svg></li>
-            </ul>
-            <p class="fw-bold text-muted mb-0">Copyright © 2025 Indo Programmer</p>
-        </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+@endsection

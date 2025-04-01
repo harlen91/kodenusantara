@@ -2,14 +2,14 @@
 
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\ProyekController;
+use App\Http\Controllers\admin\TimController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\WorkshopController;
+use App\Http\Controllers\HomeController as ControllersHomeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ControllersHomeController::class, 'index']);
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin');
 
@@ -33,6 +33,13 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/proyek/{id}/edit', [ProyekController::class, 'edit'])->name('admin.proyek.edit');
     Route::put('/proyek/update/{id}', [ProyekController::class, 'update'])->name('admin.proyek.update');
     Route::delete('/proyek/delete/{id}', [ProyekController::class, 'destroy'])->name('admin.proyek.delete');
+
+    Route::get('/tim', [TimController::class, 'index'])->name('admin.tim');
+    Route::get('/tim/create', [TimController::class, 'create'])->name('admin.tim.create');
+    Route::post('/tim', [TimController::class, 'store'])->name('admin.tim.store');
+    Route::get('/tim/{id}/edit', [TimController::class, 'edit'])->name('admin.tim.edit');
+    Route::put('/tim/update/{id}', [TimController::class, 'update'])->name('admin.tim.update');
+    Route::delete('/tim/delete/{id}', [TimController::class, 'destroy'])->name('admin.tim.delete');
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
