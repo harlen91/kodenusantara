@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\BankController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\ProyekController;
 use App\Http\Controllers\admin\TimController;
@@ -40,6 +41,12 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/tim/{id}/edit', [TimController::class, 'edit'])->name('admin.tim.edit');
     Route::put('/tim/update/{id}', [TimController::class, 'update'])->name('admin.tim.update');
     Route::delete('/tim/delete/{id}', [TimController::class, 'destroy'])->name('admin.tim.delete');
+
+    Route::get('/bank', [BankController::class, 'index'])->name('admin.bank');
+    Route::get('/bank/create', [BankController::class, 'create'])->name('admin.bank.create');
+    Route::get('/bank/{id}/edit', [BankController::class, 'edit'])->name('admin.bank.edit');
+    Route::put('/bank/update/{id}', [BankController::class, 'update'])->name('admin.bank.update');
+    Route::delete('/bank/delete/{id}', [BankController::class, 'destroy'])->name('admin.bank.delete');
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

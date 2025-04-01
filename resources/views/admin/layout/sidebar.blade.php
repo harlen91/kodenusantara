@@ -19,6 +19,7 @@
                 <ul aria-expanded="false">
                     <li><a href="{{ route('admin.tim') }}">Tim</a></li>
                     <li><a href="{{ route('admin.users') }}">Users</a></li>
+                    <li><a href="{{ route('admin.bank') }}">Bank</a></li>
                     <li><a href="{{ route('admin.proyek') }}">Project</a></li>
                 </ul>
             </li>
