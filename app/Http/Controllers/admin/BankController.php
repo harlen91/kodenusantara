@@ -40,8 +40,8 @@ class BankController extends Controller
             'atasnama.required' => 'Atas Nama tidak Boleh Kosong!'
         ]);
         Bank::create([
-            'name' => $request->nama,
-            'rekening' => $request->rekenig,
+            'nama' => $request->nama,
+            'rekening' => $request->rekening,
             'atas_nama' => $request->atasnama
         ]);
         session()->flash('success', 'Berhasil Simpan Data');
@@ -72,7 +72,7 @@ class BankController extends Controller
     {
         $bank = Bank::find($id);
         $bank->update([
-            'name' => $request->nama,
+            'nama' => $request->nama,
             'rekening' => $request->rekenig,
             'atas_nama' => $request->atasnama
         ]);

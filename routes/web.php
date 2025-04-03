@@ -8,9 +8,17 @@ use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\WorkshopController;
 use App\Http\Controllers\HomeController as ControllersHomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\WorkshopController as ControllersWorkshopController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ControllersHomeController::class, 'index']);
+Route::get('/workshop', [ControllersWorkshopController::class, 'index'])->name('workshop');
+Route::get('workshop/{id}/daftar', [ControllersWorkshopController::class, 'daftar'])->name('workshop.daftar');
+Route::post('/workshop', [ControllersWorkshopController::class, 'store'])->name('workshop.store');
+Route::get('/workshop/berhasil/{id}', [ControllersWorkshopController::class, 'berhasil'])->name('workshop.berhasil');
+Route::get('/workshop/cek/{id}', [ControllersWorkshopController::class, 'cek'])->name('workshop.cek');
+Route::post('/workshop/cek', [ControllersWorkshopController::class, 'proses'])->name('workshop.proses');
+
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin');
 
@@ -44,6 +52,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::get('/bank', [BankController::class, 'index'])->name('admin.bank');
     Route::get('/bank/create', [BankController::class, 'create'])->name('admin.bank.create');
+    Route::post('/bank', [BankController::class, 'store'])->name('admin.bank.store');
     Route::get('/bank/{id}/edit', [BankController::class, 'edit'])->name('admin.bank.edit');
     Route::put('/bank/update/{id}', [BankController::class, 'update'])->name('admin.bank.update');
     Route::delete('/bank/delete/{id}', [BankController::class, 'destroy'])->name('admin.bank.delete');

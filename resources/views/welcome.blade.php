@@ -60,9 +60,7 @@
                             memberikan pengalaman belajar langsung. Workshop kami mencakup berbagai topik, mulai dari
                             pemrograman dasar hingga pengembangan aplikasi lanjutan. Bergabunglah dengan kami untuk
                             mendapatkan pengetahuan praktis dan jaringan dengan para profesional di bidangnya.</p><a
-                            href="#">Learn More&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em"
-                                height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
-                            </svg></a>
+                            href="{{ route('workshop') }}">Learn More</a>
                     </div>
                 </div>
             </div>

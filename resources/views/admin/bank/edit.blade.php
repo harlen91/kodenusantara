@@ -36,8 +36,8 @@
                         <div class="form-group">
                             <label>Atas Nama Tabungan</label>
                             <input type="text" class="form-control input-default @error('atasnama') is-invalid @enderror"
-                                name="rekening" placeholder="Atas Nama Tabungan" value="{{ $bank->atas_nama }}">
-                            @error('atasnamß')
+                                name="atasnama" placeholder="Atas Nama Tabungan" value="{{ $bank->atas_nama }}">
+                            @error('atasnama')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
