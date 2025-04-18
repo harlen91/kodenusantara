@@ -35,6 +35,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/workshop/{id}/edit', [WorkshopController::class, 'edit'])->name('admin.workshop.edit');
     Route::put('/workshop/update/{id}', [WorkshopController::class, 'update'])->name('admin.workshop.update');
     Route::delete('/workshop/delete/{id}', [WorkshopController::class, 'destroy'])->name('admin.workshop.delete');
+    Route::get('/workshop/bayar', [WorkshopController::class, 'bayar'])->name('admin.workshop.bayar');
+    Route::get('/workshop/{id}/detail', [WorkshopController::class, 'detail'])->name('admin.workshop.detail');
+    Route::post('/workshop/proses', [WorkshopController::class, 'proses'])->name('admin.workshop.proses');
 
     Route::get('/proyek', [ProyekController::class, 'index'])->name('admin.proyek');
     Route::get('/proyek/create', [ProyekController::class, 'create'])->name('admin.proyek.create');

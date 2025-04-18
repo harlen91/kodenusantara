@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Peserta;
 use App\Models\Workshop;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\FuncCall;
 
 class WorkshopController extends Controller
 {
@@ -110,5 +112,46 @@ class WorkshopController extends Controller
         $workshop->delete();
         session()->flash('success', 'Berhasil Hapus Data!');
         return redirect()->route('admin.workshop');
+    }
+    public function bayar()
+    {
+        $data['bayar'] = Peserta::where('status', 'wait')->get();
+        return view('admin.workshop.bayar', $data);
+    }
+    public function detail($id)
+    {
+        $data['bayar'] = Peserta::where('id', $id)->first();
+        return view('admin.workshop.detail', $data);
+    }
+    public function proses(Request $request)
+    {
+        if ($request->status == 'tolak') {
+            $request->validate([
+                'status' => 'required',
+                'keterangan' => 'required'
+            ], [
+                'status.required' => 'Status Tidak Boleh Kosong!',
+                'keterangan.required' => 'Keterangan Tidak Boleh Kosong!',
+            ]);
+            $peserta = Peserta::find($request->kode);
+            $peserta->update([
+                'keterangan' => $request->keterangan,
+                'status' => 'tolak'
+            ]);
+        }
+
+        if ($request->status == '') {
+            $request->validate([
+                'status' => 'required',
+            ], [
+                'status.required' => 'Status Tidak Boleh Kosong!',
+            ]);
+            $peserta = Peserta::find($request->kode);
+            $peserta->update([
+                'status' => 'terima'
+            ]);
+        }
+        $request->session()->flash('success', 'Berhasil Proses Data!');
+        return redirect()->route('admin.workshop.bayar');
     }
 }
