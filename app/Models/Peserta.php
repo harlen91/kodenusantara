@@ -12,7 +12,7 @@ class Peserta extends Model
 
     protected $table = 'pesertas';
     protected $primaryKey = 'id';
-    protected $fillable = ['id', 'workshop_id', 'kode', 'nama', 'email', 'ponsel', 'bank', 'rekening', 'nominal', 'resi', 'keterangan', 'status'];
+    protected $fillable = ['id', 'workshop_id', 'kode', 'nama_depan', 'nama_belakang', 'email', 'ponsel', 'bank', 'rekening', 'nominal', 'resi', 'keterangan', 'status', 'token'];
 
     public function workshop(): BelongsTo
     {

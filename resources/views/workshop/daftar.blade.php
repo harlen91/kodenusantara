@@ -22,15 +22,26 @@
                         <div class="card-header">Form Pendaftaran Workshop</div>
                         <div class="card-body">
                             <h4 class="card-title">{{ $workshop->nama }}</h4>
-                            <form action="{{ route('workshop.store') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('workshop.store') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="kode" value="{{ $workshop->id }}">
                                 <div class="mb-3">
-                                    <label for="nama">Nama Lengkap</label>
-                                    <input type="text" name="nama" id="nama"
+                                    <label for="depan">Nama Depan</label>
+                                    <input type="text" name="depan" id="depan"
                                         class="form-control @error('nama') is-invalid @enderror"
-                                        value="{{ @old('nama') }}">
-                                    @error('nama')
+                                        value="{{ @old('depan') }}">
+                                    @error('depan')
+                                        <div class="text-danger">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="belakang">Nama Belakang</label>
+                                    <input type="text" name="belakang" id="depan"
+                                        class="form-control @error('belakang') is-invalid @enderror"
+                                        value="{{ @old('belakang') }}">
+                                    @error('belakang')
                                         <div class="text-danger">
                                             {{ $message }}
                                         </div>
@@ -69,42 +80,6 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <h6>Informasi Pembayaran</h6>
-                                <div class="mb-3">
-                                    <label for="rekening">Nomor Rekening Anda</label>
-                                    <input type="text" name="rekening" id="rekening"
-                                        class="form-control @error('rekening') is-invalid @enderror"
-                                        value="{{ @old('rekening') }}">
-                                    @error('rekening')
-                                        <div class="text-danger">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="bank">Nama Bank Anda</label>
-                                    <input type="text" name="bank" id="bank"
-                                        class="form-control @error('bank') is-invalid @enderror"
-                                        value="{{ @old('bank') }}">
-                                    @error('bank')
-                                        <div class="text-danger"> {{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="resi">Bukti Transfer</label>
-                                    <input type="file" name="resi" id="ponsel"
-                                        class="form-control @error('resi') is-invalid @enderror"
-                                        value="{{ @old('resi') }}">
-                                    @error('resi')
-                                        <div class="text-danger">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <p class="fw-bold text-success">Silahkan transfer biaya pendaftaran sebesar harga yang
-                                    sudah
-                                    ditentukan melalui daftar Bank
-                                    yang ada...</p>
                                 <div class="d-grid gap-2">
                                     <button type="submit" class="btn btn-primary">
                                         Daftar Sekarang!
@@ -115,33 +90,6 @@
                         </div>
                     </div>
 
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Informasi Bank Transfer</div>
-                        <div class="card-body">
-                            <h4 class="card-title mb-3">Daftar Bank</h4>
-                            @foreach ($bank as $data)
-                                <h6 class="mt-3">BANK {{ $data->nama }}</h6>
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        No Rekening
-                                    </div>
-                                    <div class="col-md-8">
-                                        : {{ $data->rekening }}
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        Atas Nama
-                                    </div>
-                                    <div class="col-md-8">
-                                        : {{ $data->atas_nama }}
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="d-grid gap-2 mt-3">

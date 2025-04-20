@@ -16,27 +16,23 @@ class WorkshopController extends Controller
     }
     public function daftar($id)
     {
-        $data['bank'] = Bank::all();
+        // $data['bank'] = Bank::all();
         $data['workshop'] = Workshop::find($id);
         return view('workshop.daftar', $data);
     }
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'depan' => 'required',
+            'belakang' => 'required',
             'email' => 'required|email',
-            'ponsel' => 'required',
-            'rekening' => 'required',
-            'bank' => 'required',
-            'resi' => 'required'
+            'ponsel' => 'required'
         ], [
-            'nama.required' => 'Nama Lengkap Tidak Boleh Kosong!',
+            'depan.required' => 'Nama Depan Tidak Boleh Kosong!',
+            'belakang.required' => 'Nama Belakang Tidak Boleh Kosong!',
             'email.required' => 'Email Tidak Boleh Kosong!',
             'email.email' => 'Format Email Tidak Sesuai',
-            'ponsel.required' => 'Ponsel Tidak Boleh Kosong!',
-            'rekening.required' => 'Rekening Tidak Boleh Kosong!',
-            'bank.required' => 'Nama Bank Tidak Boleh Kosong!',
-            'resi.required' => 'Resi Transfer Tidak Boleh Kosong!'
+            'ponsel.required' => 'Ponsel Tidak Boleh Kosong!'
         ]);
         $cek = Peserta::where(['email' => $request->email, 'workshop_id' => $request->kode])->count();
         if ($cek >= 1) {
@@ -44,20 +40,43 @@ class WorkshopController extends Controller
             $request->session()->flash('error', 'Anda Sudah Mendaftar Workshop ' . $cari->nama . "!");
             return redirect()->route('workshop');
         } else {
-            $image = $request->file('resi');
-            $imageName = $image->hashName();
-            $request->resi->move(public_path('transfer'), $imageName);
+            // $image = $request->file('resi');
+            // $imageName = $image->hashName();
+            // $request->resi->move(public_path('transfer'), $imageName);
             $kode = time();
+            // Set your Merchant Server Key
+            \Midtrans\Config::$serverKey = 'SB-Mid-server-YthVtjTKgJKqZLOBL9FPZ1u_';
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = false;
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = true;
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = true;
+
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => $kode,
+                    'gross_amount' => $request->harga,
+                ),
+                'customer_details' => array(
+                    'first_name' => $request->depan,
+                    'last_name' => $request->belakang,
+                    'email' => $request->email,
+                    'phone' => $request->ponsel,
+                ),
+            );
+
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            // dd($snapToken);
             Peserta::create([
-                'nama' => $request->nama,
+                'nama_depan' => $request->depan,
+                'nama_belakang' => $request->belakang,
                 'workshop_id' => $request->kode,
                 'kode' => $kode,
                 'email' => $request->email,
                 'ponsel' => $request->ponsel,
-                'rekening' => $request->rekening,
                 'nominal' => $request->harga,
-                'bank' => $request->bank,
-                'resi' => $imageName,
+                'token' => $snapToken,
                 'status' => 'wait'
             ]);
             $request->session()->flash('success', 'Anda Berhasil Terdaftar di Workshop!');
@@ -83,6 +102,7 @@ class WorkshopController extends Controller
         ]);
 
         $data['peserta'] = Peserta::where('kode', $request->nomor)->first();
+        // dd($data);
         return view('workshop.berhasil', $data);
     }
 }

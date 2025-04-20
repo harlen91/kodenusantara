@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('bank')->nullable();
             $table->string('nominal')->nullable();
             $table->string('resi')->nullable();
-            $table->enum('status', ['wait', 'terima', 'tolak'])->nullable();
+            $table->string('status')->nullable();
+            $table->text('token')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();
