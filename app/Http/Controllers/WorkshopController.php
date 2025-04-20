@@ -77,7 +77,6 @@ class WorkshopController extends Controller
                 'ponsel' => $request->ponsel,
                 'nominal' => $request->harga,
                 'token' => $snapToken,
-                'status' => 'wait'
             ]);
             $request->session()->flash('success', 'Anda Berhasil Terdaftar di Workshop!');
             return redirect()->route('workshop.berhasil', $kode);
