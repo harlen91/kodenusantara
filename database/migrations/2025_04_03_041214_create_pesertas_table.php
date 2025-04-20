@@ -16,7 +16,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Workshop::class)->constrained()->onDelete('cascade');
             $table->string('kode')->nullable();
-            $table->string('nama')->nullable();
+            $table->string('nama_depan')->nullable();
+            $table->string('nama_belakang')->nullable();
             $table->string('email')->nullable();
             $table->string('ponsel')->nullable();
             $table->string('rekening')->nullable();
